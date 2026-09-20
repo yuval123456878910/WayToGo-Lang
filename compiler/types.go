@@ -2,10 +2,11 @@ package compiler
 
 import (
 	"encoding/binary"
+
 	"mj/parser"
 )
 
-func SmartAddInt(number int) []byte {
+func SmartAddInt(number int64) []byte {
 	switch number {
 	case 0:
 		return []byte{ICONST_0}
@@ -13,6 +14,15 @@ func SmartAddInt(number int) []byte {
 		return []byte{ICONST_1}
 	case 2:
 		return []byte{ICONST_2}
+	case 3:
+		return []byte{ICONST_3}
+	case 4:
+		return []byte{ICONST_4}
+	case 5:
+		return []byte{ICONST_5}
+	}
+	if number <= 127 && number > -128 {
+		return []byte{BIPUSH, byte(number)}
 	}
 }
 
@@ -22,6 +32,7 @@ func (l *CompilerWalk) EnterTypes_of_tokens(ctx *parser.Types_of_tokensContext) 
 		l.Add()
 	}
 }
+
 func TurnTypeNameToDescriptor_type(typeGiven parser.ITypesKeywordContext) []byte {
 	switch {
 	case typeGiven.INT_TYPE() != nil:
