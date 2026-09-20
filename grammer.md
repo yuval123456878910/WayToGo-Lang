@@ -1,0 +1,1 @@
+func ->  def <name>  (<type> perametes) (<type returns>)

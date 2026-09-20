@@ -1,0 +1,7 @@
+package compiler
+
+var (
+	MAGIC         = []byte{0xCA, 0xFE, 0xBA, 0xBE}
+	MINOR_VERSION = []byte{0x00, 0x00}
+	MAJOR_VERSION = []byte{0x00, 0x45}
+)

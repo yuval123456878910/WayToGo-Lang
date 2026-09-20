@@ -1,0 +1,4 @@
+int i = 5 + 1
+pri pub def wow(int a, int b) (int) {
+    int f = 10
+}
