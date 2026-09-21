@@ -1,7 +1,6 @@
 package compiler
 
 import (
-	"fmt"
 	"strconv"
 
 	"mj/parser"
@@ -13,13 +12,14 @@ func (l *CompilerWalk) ExitExpr(ctx *parser.ExprContext) {
 		Expretions := ctx.AllExpr()
 		LeftType := l.ByteCode.ExprTypes[Expretions[0]]
 		RightType := l.ByteCode.ExprTypes[Expretions[1]]
-		fmt.Println("eee", LeftType, RightType)
 		if LeftType != RightType {
 			panic("")
 		}
 		switch LeftType {
 		case "int":
 			l.Add(IADD)
+		case "float":
+			l.Add(LADD)
 		}
 		l.ByteCode.ExprTypes[ctx] = LeftType
 	case ctx.MUL() != nil:
@@ -33,6 +33,8 @@ func (l *CompilerWalk) ExitExpr(ctx *parser.ExprContext) {
 		switch LeftType {
 		case "int":
 			l.Add(LMUL)
+		case "float":
+			l.Add(FMUL)
 		}
 		l.ByteCode.ExprTypes[ctx] = LeftType
 	case ctx.Types_of_tokens().NUM() != nil:
@@ -44,7 +46,15 @@ func (l *CompilerWalk) ExitExpr(ctx *parser.ExprContext) {
 
 		l.ByteCode.SmartAddIntReturn(number)
 		l.ByteCode.ExprTypes[ctx] = "int"
+	case ctx.Types_of_tokens().FLOAT() != nil:
+		numberText := ctx.Types_of_tokens().FLOAT().GetText()
+		number, err := strconv.ParseFloat(numberText, 32)
+		if err != nil {
+			panic("Text cant be converted to float")
+		}
 
+		l.ByteCode.SmartAddFloatReturn(float32(number))
+		l.ByteCode.ExprTypes[ctx] = "float"
 	}
 
 	//return JVMbytecode{}

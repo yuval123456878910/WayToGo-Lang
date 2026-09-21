@@ -43,7 +43,10 @@ func (l *CompilerWalk) ExitDecl(ctx *parser.DeclContext) {
 			panic("a token of not a value num cant be registered as an int")
 		} else if v.STRING() != nil && Type != "string" {
 			panic("a token of not a value string cant be registered as a string")
+		} else if v.FLOAT() != nil && Type != "float" {
+			panic("a token of not a value float cant be registered as a float")
 		}
+
 	} else if v := ctx.Expr(); v != nil {
 		typeGot := l.ByteCode.ExprTypes[v]
 

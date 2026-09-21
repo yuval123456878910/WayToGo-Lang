@@ -2,6 +2,7 @@ package compiler
 
 import (
 	"encoding/binary"
+	"math"
 
 	"mj/parser"
 )
@@ -25,6 +26,27 @@ func (j *JVMbytecode) SmartAddIntReturn(number int) []byte {
 		return []byte{BIPUSH, byte(number)}
 	}
 	loc := j.POSTorGETintConst(number)
+	if loc <= 256 {
+		return []byte{LDC, byte(loc)}
+	}
+	WideReturn := make([]byte, 3)
+	WideReturn[0] = LDC_W
+	binary.BigEndian.PutUint16(WideReturn[1:], loc)
+	return WideReturn
+}
+
+func (j *JVMbytecode) SmartAddFloatReturn(number float32) []byte {
+	switch number {
+	case 0:
+		return []byte{FCONST_0}
+	case 1:
+		return []byte{FCONST_1}
+	case 2:
+		return []byte{FCONST_2}
+	case 3:
+		return []byte{FLOAD_3}
+	}
+	loc := j.POSTorGETfloatConst(number)
 	if loc <= 256 {
 		return []byte{LDC, byte(loc)}
 	}
@@ -69,5 +91,14 @@ func (j *JVMbytecode) MakeConstantInt(num int) {
 	binary.BigEndian.PutUint32(byteReturn[:], uint32(num))
 	j.CurrentLocPool++
 	j.ContantPool = append(j.ContantPool, append([]byte{ConstantInteger}, byteReturn...)...)
+	j.ContantPoolData[num] = j.CurrentLocPool
+}
+
+func (j *JVMbytecode) MakeConstantFloat(num float32) {
+	bits := math.Float32bits(float32(num))
+	byteReturn := make([]byte, 4)
+	binary.BigEndian.PutUint32(byteReturn[:], bits)
+	j.CurrentLocPool++
+	j.ContantPool = append(j.ContantPool, append([]byte{ConstantFloat}, byteReturn...)...)
 	j.ContantPoolData[num] = j.CurrentLocPool
 }

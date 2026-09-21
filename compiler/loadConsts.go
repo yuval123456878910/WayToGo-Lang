@@ -10,6 +10,11 @@ func (j *JVMbytecode) ReturnInstractionConstInt(num int) (uint16, bool) {
 	return v, k
 }
 
+func (j *JVMbytecode) ReturnInstractionConstFloat(num float32) (uint16, bool) {
+	v, k := j.ContantPoolData[num]
+	return v, k
+}
+
 func (j *JVMbytecode) POSTorGETnameConst(Name string) uint16 {
 	v, ok := j.ReturnInstractionConst(Name)
 	if ok {
@@ -27,5 +32,15 @@ func (j *JVMbytecode) POSTorGETintConst(num int) uint16 {
 	}
 	j.MakeConstantInt(num)
 	v2, _ := j.ReturnInstractionConstInt(num)
+	return v2
+}
+
+func (j *JVMbytecode) POSTorGETfloatConst(num float32) uint16 {
+	v, ok := j.ReturnInstractionConstFloat(num)
+	if ok {
+		return v
+	}
+	j.MakeConstantFloat(num)
+	v2, _ := j.ReturnInstractionConstFloat(num)
 	return v2
 }
