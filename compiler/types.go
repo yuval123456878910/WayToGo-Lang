@@ -6,7 +6,7 @@ import (
 	"mj/parser"
 )
 
-func SmartAddInt(number int64) []byte {
+func (j *JVMbytecode) SmartAddIntReturn(number int) []byte {
 	switch number {
 	case 0:
 		return []byte{ICONST_0}
@@ -24,6 +24,14 @@ func SmartAddInt(number int64) []byte {
 	if number <= 127 && number > -128 {
 		return []byte{BIPUSH, byte(number)}
 	}
+	loc := j.POSTorGETintConst(number)
+	if loc <= 256 {
+		return []byte{LDC, byte(loc)}
+	}
+	WideReturn := make([]byte, 3)
+	WideReturn[0] = LDC_W
+	binary.BigEndian.PutUint16(WideReturn[1:], loc)
+	return WideReturn
 }
 
 func (l *CompilerWalk) EnterTypes_of_tokens(ctx *parser.Types_of_tokensContext) {
@@ -54,4 +62,12 @@ func (j *JVMbytecode) MakeConstantUtf8(text string) {
 	j.CurrentLocPool++
 	j.ContantPoolData[text] = j.CurrentLocPool
 	j.ContantPool = append(j.ContantPool, bytesReturn...)
+}
+
+func (j *JVMbytecode) MakeConstantInt(num int) {
+	byteReturn := make([]byte, 4)
+	binary.BigEndian.PutUint32(byteReturn[:], uint32(num))
+	j.CurrentLocPool++
+	j.ContantPool = append(j.ContantPool, append([]byte{ConstantInteger}, byteReturn...)...)
+	j.ContantPoolData[num] = j.CurrentLocPool
 }

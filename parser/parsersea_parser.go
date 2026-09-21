@@ -34,12 +34,12 @@ func parserseaParserInit() {
 	staticData := &ParserSeaParserStaticData
 	staticData.LiteralNames = []string{
 		"", "'='", "'{'", "'}'", "'('", "','", "')'", "'return'", "'def'", "'int'",
-		"'string'", "'pub'", "'pri'", "'+'", "'*'",
+		"'string'", "'float'", "'pub'", "'pri'", "'+'", "'*'",
 	}
 	staticData.SymbolicNames = []string{
 		"", "", "", "", "", "", "", "RETURN", "DEFINE", "INT_TYPE", "STRING_TYPE",
-		"PUBLIC", "PRIVATE", "PLUS", "MUL", "ID", "NUM", "COMMENT", "STRING",
-		"WS",
+		"FLOAT_TYPE", "PUBLIC", "PRIVATE", "PLUS", "MUL", "ID", "FLOAT", "NUM",
+		"COMMENT", "STRING", "WS",
 	}
 	staticData.RuleNames = []string{
 		"progAbilities", "prog", "decl", "block", "assign", "flags", "types_of_tokens",
@@ -47,7 +47,7 @@ func parserseaParserInit() {
 	}
 	staticData.PredictionContextCache = antlr.NewPredictionContextCache()
 	staticData.serializedATN = []int32{
-		4, 1, 19, 138, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7,
+		4, 1, 21, 138, 2, 0, 7, 0, 2, 1, 7, 1, 2, 2, 7, 2, 2, 3, 7, 3, 2, 4, 7,
 		4, 2, 5, 7, 5, 2, 6, 7, 6, 2, 7, 7, 7, 2, 8, 7, 8, 2, 9, 7, 9, 2, 10, 7,
 		10, 2, 11, 7, 11, 2, 12, 7, 12, 1, 0, 1, 0, 1, 0, 1, 0, 3, 0, 31, 8, 0,
 		1, 1, 4, 1, 34, 8, 1, 11, 1, 12, 1, 35, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1,
@@ -62,7 +62,7 @@ func parserseaParserInit() {
 		12, 1, 12, 1, 12, 1, 12, 3, 12, 125, 8, 12, 1, 12, 1, 12, 1, 12, 1, 12,
 		1, 12, 1, 12, 5, 12, 133, 8, 12, 10, 12, 12, 12, 136, 9, 12, 1, 12, 1,
 		99, 1, 24, 13, 0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 0, 3, 1,
-		0, 11, 12, 2, 0, 16, 16, 18, 18, 1, 0, 9, 10, 142, 0, 30, 1, 0, 0, 0, 2,
+		0, 12, 13, 2, 0, 17, 18, 20, 20, 1, 0, 9, 11, 142, 0, 30, 1, 0, 0, 0, 2,
 		33, 1, 0, 0, 0, 4, 39, 1, 0, 0, 0, 6, 46, 1, 0, 0, 0, 8, 55, 1, 0, 0, 0,
 		10, 61, 1, 0, 0, 0, 12, 63, 1, 0, 0, 0, 14, 65, 1, 0, 0, 0, 16, 67, 1,
 		0, 0, 0, 18, 70, 1, 0, 0, 0, 20, 94, 1, 0, 0, 0, 22, 99, 1, 0, 0, 0, 24,
@@ -71,16 +71,16 @@ func parserseaParserInit() {
 		28, 1, 0, 0, 0, 30, 29, 1, 0, 0, 0, 31, 1, 1, 0, 0, 0, 32, 34, 3, 0, 0,
 		0, 33, 32, 1, 0, 0, 0, 34, 35, 1, 0, 0, 0, 35, 33, 1, 0, 0, 0, 35, 36,
 		1, 0, 0, 0, 36, 37, 1, 0, 0, 0, 37, 38, 5, 0, 0, 1, 38, 3, 1, 0, 0, 0,
-		39, 40, 3, 14, 7, 0, 40, 41, 5, 15, 0, 0, 41, 44, 5, 1, 0, 0, 42, 45, 3,
+		39, 40, 3, 14, 7, 0, 40, 41, 5, 16, 0, 0, 41, 44, 5, 1, 0, 0, 42, 45, 3,
 		12, 6, 0, 43, 45, 3, 24, 12, 0, 44, 42, 1, 0, 0, 0, 44, 43, 1, 0, 0, 0,
 		45, 5, 1, 0, 0, 0, 46, 50, 5, 2, 0, 0, 47, 49, 3, 0, 0, 0, 48, 47, 1, 0,
 		0, 0, 49, 52, 1, 0, 0, 0, 50, 48, 1, 0, 0, 0, 50, 51, 1, 0, 0, 0, 51, 53,
 		1, 0, 0, 0, 52, 50, 1, 0, 0, 0, 53, 54, 5, 3, 0, 0, 54, 7, 1, 0, 0, 0,
-		55, 56, 5, 15, 0, 0, 56, 59, 5, 1, 0, 0, 57, 60, 3, 12, 6, 0, 58, 60, 3,
+		55, 56, 5, 16, 0, 0, 56, 59, 5, 1, 0, 0, 57, 60, 3, 12, 6, 0, 58, 60, 3,
 		24, 12, 0, 59, 57, 1, 0, 0, 0, 59, 58, 1, 0, 0, 0, 60, 9, 1, 0, 0, 0, 61,
 		62, 7, 0, 0, 0, 62, 11, 1, 0, 0, 0, 63, 64, 7, 1, 0, 0, 64, 13, 1, 0, 0,
 		0, 65, 66, 7, 2, 0, 0, 66, 15, 1, 0, 0, 0, 67, 68, 3, 14, 7, 0, 68, 69,
-		5, 15, 0, 0, 69, 17, 1, 0, 0, 0, 70, 79, 5, 4, 0, 0, 71, 76, 3, 16, 8,
+		5, 16, 0, 0, 69, 17, 1, 0, 0, 0, 70, 79, 5, 4, 0, 0, 71, 76, 3, 16, 8,
 		0, 72, 73, 5, 5, 0, 0, 73, 75, 3, 16, 8, 0, 74, 72, 1, 0, 0, 0, 75, 78,
 		1, 0, 0, 0, 76, 74, 1, 0, 0, 0, 76, 77, 1, 0, 0, 0, 77, 80, 1, 0, 0, 0,
 		78, 76, 1, 0, 0, 0, 79, 71, 1, 0, 0, 0, 79, 80, 1, 0, 0, 0, 80, 81, 1,
@@ -91,17 +91,17 @@ func parserseaParserInit() {
 		94, 83, 1, 0, 0, 0, 94, 95, 1, 0, 0, 0, 95, 21, 1, 0, 0, 0, 96, 98, 3,
 		10, 5, 0, 97, 96, 1, 0, 0, 0, 98, 101, 1, 0, 0, 0, 99, 100, 1, 0, 0, 0,
 		99, 97, 1, 0, 0, 0, 100, 102, 1, 0, 0, 0, 101, 99, 1, 0, 0, 0, 102, 103,
-		5, 8, 0, 0, 103, 104, 5, 15, 0, 0, 104, 105, 3, 18, 9, 0, 105, 106, 3,
+		5, 8, 0, 0, 103, 104, 5, 16, 0, 0, 104, 105, 3, 18, 9, 0, 105, 106, 3,
 		20, 10, 0, 106, 107, 3, 6, 3, 0, 107, 23, 1, 0, 0, 0, 108, 109, 6, 12,
-		-1, 0, 109, 110, 5, 15, 0, 0, 110, 119, 5, 4, 0, 0, 111, 116, 3, 24, 12,
+		-1, 0, 109, 110, 5, 16, 0, 0, 110, 119, 5, 4, 0, 0, 111, 116, 3, 24, 12,
 		0, 112, 113, 5, 5, 0, 0, 113, 115, 3, 24, 12, 0, 114, 112, 1, 0, 0, 0,
 		115, 118, 1, 0, 0, 0, 116, 114, 1, 0, 0, 0, 116, 117, 1, 0, 0, 0, 117,
 		120, 1, 0, 0, 0, 118, 116, 1, 0, 0, 0, 119, 111, 1, 0, 0, 0, 119, 120,
-		1, 0, 0, 0, 120, 121, 1, 0, 0, 0, 121, 125, 5, 6, 0, 0, 122, 125, 5, 15,
+		1, 0, 0, 0, 120, 121, 1, 0, 0, 0, 121, 125, 5, 6, 0, 0, 122, 125, 5, 16,
 		0, 0, 123, 125, 3, 12, 6, 0, 124, 108, 1, 0, 0, 0, 124, 122, 1, 0, 0, 0,
 		124, 123, 1, 0, 0, 0, 125, 134, 1, 0, 0, 0, 126, 127, 10, 4, 0, 0, 127,
-		128, 5, 13, 0, 0, 128, 133, 3, 24, 12, 5, 129, 130, 10, 3, 0, 0, 130, 131,
-		5, 14, 0, 0, 131, 133, 3, 24, 12, 4, 132, 126, 1, 0, 0, 0, 132, 129, 1,
+		128, 5, 14, 0, 0, 128, 133, 3, 24, 12, 5, 129, 130, 10, 3, 0, 0, 130, 131,
+		5, 15, 0, 0, 131, 133, 3, 24, 12, 4, 132, 126, 1, 0, 0, 0, 132, 129, 1,
 		0, 0, 0, 133, 136, 1, 0, 0, 0, 134, 132, 1, 0, 0, 0, 134, 135, 1, 0, 0,
 		0, 135, 25, 1, 0, 0, 0, 136, 134, 1, 0, 0, 0, 15, 30, 35, 44, 50, 59, 76,
 		79, 89, 94, 99, 116, 119, 124, 132, 134,
@@ -153,15 +153,17 @@ const (
 	ParserSeaParserDEFINE      = 8
 	ParserSeaParserINT_TYPE    = 9
 	ParserSeaParserSTRING_TYPE = 10
-	ParserSeaParserPUBLIC      = 11
-	ParserSeaParserPRIVATE     = 12
-	ParserSeaParserPLUS        = 13
-	ParserSeaParserMUL         = 14
-	ParserSeaParserID          = 15
-	ParserSeaParserNUM         = 16
-	ParserSeaParserCOMMENT     = 17
-	ParserSeaParserSTRING      = 18
-	ParserSeaParserWS          = 19
+	ParserSeaParserFLOAT_TYPE  = 11
+	ParserSeaParserPUBLIC      = 12
+	ParserSeaParserPRIVATE     = 13
+	ParserSeaParserPLUS        = 14
+	ParserSeaParserMUL         = 15
+	ParserSeaParserID          = 16
+	ParserSeaParserFLOAT       = 17
+	ParserSeaParserNUM         = 18
+	ParserSeaParserCOMMENT     = 19
+	ParserSeaParserSTRING      = 20
+	ParserSeaParserWS          = 21
 )
 
 // ParserSeaParser rules.
@@ -492,7 +494,7 @@ func (p *ParserSeaParser) Prog() (localctx IProgContext) {
 	}
 	_la = p.GetTokenStream().LA(1)
 
-	for ok := true; ok; ok = ((int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&368384) != 0) {
+	for ok := true; ok; ok = ((int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&1523456) != 0) {
 		{
 			p.SetState(32)
 			p.ProgAbilities()
@@ -837,7 +839,7 @@ func (p *ParserSeaParser) Block() (localctx IBlockContext) {
 	}
 	_la = p.GetTokenStream().LA(1)
 
-	for (int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&368384) != 0 {
+	for (int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&1523456) != 0 {
 		{
 			p.SetState(47)
 			p.ProgAbilities()
@@ -1148,6 +1150,7 @@ type ITypes_of_tokensContext interface {
 	// Getter signatures
 	NUM() antlr.TerminalNode
 	STRING() antlr.TerminalNode
+	FLOAT() antlr.TerminalNode
 
 	// IsTypes_of_tokensContext differentiates from other interfaces.
 	IsTypes_of_tokensContext()
@@ -1193,6 +1196,10 @@ func (s *Types_of_tokensContext) STRING() antlr.TerminalNode {
 	return s.GetToken(ParserSeaParserSTRING, 0)
 }
 
+func (s *Types_of_tokensContext) FLOAT() antlr.TerminalNode {
+	return s.GetToken(ParserSeaParserFLOAT, 0)
+}
+
 func (s *Types_of_tokensContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -1223,7 +1230,7 @@ func (p *ParserSeaParser) Types_of_tokens() (localctx ITypes_of_tokensContext) {
 		p.SetState(63)
 		_la = p.GetTokenStream().LA(1)
 
-		if !(_la == ParserSeaParserNUM || _la == ParserSeaParserSTRING) {
+		if !((int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&1441792) != 0) {
 			p.GetErrorHandler().RecoverInline(p)
 		} else {
 			p.GetErrorHandler().ReportMatch(p)
@@ -1254,6 +1261,7 @@ type ITypesKeywordContext interface {
 	// Getter signatures
 	INT_TYPE() antlr.TerminalNode
 	STRING_TYPE() antlr.TerminalNode
+	FLOAT_TYPE() antlr.TerminalNode
 
 	// IsTypesKeywordContext differentiates from other interfaces.
 	IsTypesKeywordContext()
@@ -1299,6 +1307,10 @@ func (s *TypesKeywordContext) STRING_TYPE() antlr.TerminalNode {
 	return s.GetToken(ParserSeaParserSTRING_TYPE, 0)
 }
 
+func (s *TypesKeywordContext) FLOAT_TYPE() antlr.TerminalNode {
+	return s.GetToken(ParserSeaParserFLOAT_TYPE, 0)
+}
+
 func (s *TypesKeywordContext) GetRuleContext() antlr.RuleContext {
 	return s
 }
@@ -1329,7 +1341,7 @@ func (p *ParserSeaParser) TypesKeyword() (localctx ITypesKeywordContext) {
 		p.SetState(65)
 		_la = p.GetTokenStream().LA(1)
 
-		if !(_la == ParserSeaParserINT_TYPE || _la == ParserSeaParserSTRING_TYPE) {
+		if !((int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&3584) != 0) {
 			p.GetErrorHandler().RecoverInline(p)
 		} else {
 			p.GetErrorHandler().ReportMatch(p)
@@ -1596,7 +1608,7 @@ func (p *ParserSeaParser) ParamList() (localctx IParamListContext) {
 	}
 	_la = p.GetTokenStream().LA(1)
 
-	if _la == ParserSeaParserINT_TYPE || _la == ParserSeaParserSTRING_TYPE {
+	if (int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&3584) != 0 {
 		{
 			p.SetState(71)
 			p.Param()
@@ -2272,7 +2284,7 @@ func (p *ParserSeaParser) expr(_p int) (localctx IExprContext) {
 		}
 		_la = p.GetTokenStream().LA(1)
 
-		if (int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&360448) != 0 {
+		if (int64(_la) & ^0x3f) == 0 && ((int64(1)<<_la)&1507328) != 0 {
 			{
 				p.SetState(111)
 				p.expr(0)

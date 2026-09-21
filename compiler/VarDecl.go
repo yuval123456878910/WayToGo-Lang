@@ -46,6 +46,7 @@ func (l *CompilerWalk) ExitDecl(ctx *parser.DeclContext) {
 		}
 	} else if v := ctx.Expr(); v != nil {
 		typeGot := l.ByteCode.ExprTypes[v]
+
 		if typeGot != Type {
 			panic("Type mitchmach")
 		}

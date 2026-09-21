@@ -17,8 +17,8 @@ public class ParserSeaParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, RETURN=7, DEFINE=8, INT_TYPE=9, 
-		STRING_TYPE=10, PUBLIC=11, PRIVATE=12, PLUS=13, MUL=14, ID=15, NUM=16, 
-		COMMENT=17, STRING=18, WS=19;
+		STRING_TYPE=10, FLOAT_TYPE=11, PUBLIC=12, PRIVATE=13, PLUS=14, MUL=15, 
+		ID=16, FLOAT=17, NUM=18, COMMENT=19, STRING=20, WS=21;
 	public static final int
 		RULE_progAbilities = 0, RULE_prog = 1, RULE_decl = 2, RULE_block = 3, 
 		RULE_assign = 4, RULE_flags = 5, RULE_types_of_tokens = 6, RULE_typesKeyword = 7, 
@@ -35,15 +35,15 @@ public class ParserSeaParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'='", "'{'", "'}'", "'('", "','", "')'", "'return'", "'def'", 
-			"'int'", "'string'", "'pub'", "'pri'", "'+'", "'*'"
+			"'int'", "'string'", "'float'", "'pub'", "'pri'", "'+'", "'*'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, "RETURN", "DEFINE", "INT_TYPE", 
-			"STRING_TYPE", "PUBLIC", "PRIVATE", "PLUS", "MUL", "ID", "NUM", "COMMENT", 
-			"STRING", "WS"
+			"STRING_TYPE", "FLOAT_TYPE", "PUBLIC", "PRIVATE", "PLUS", "MUL", "ID", 
+			"FLOAT", "NUM", "COMMENT", "STRING", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -215,7 +215,7 @@ public class ParserSeaParser extends Parser {
 				setState(35); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 368384L) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & 1523456L) != 0) );
 			setState(37);
 			match(EOF);
 			}
@@ -332,7 +332,7 @@ public class ParserSeaParser extends Parser {
 			setState(50);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 368384L) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1523456L) != 0)) {
 				{
 				{
 				setState(47);
@@ -472,6 +472,7 @@ public class ParserSeaParser extends Parser {
 	public static class Types_of_tokensContext extends ParserRuleContext {
 		public TerminalNode NUM() { return getToken(ParserSeaParser.NUM, 0); }
 		public TerminalNode STRING() { return getToken(ParserSeaParser.STRING, 0); }
+		public TerminalNode FLOAT() { return getToken(ParserSeaParser.FLOAT, 0); }
 		public Types_of_tokensContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -495,7 +496,7 @@ public class ParserSeaParser extends Parser {
 			{
 			setState(63);
 			_la = _input.LA(1);
-			if ( !(_la==NUM || _la==STRING) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 1441792L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -520,6 +521,7 @@ public class ParserSeaParser extends Parser {
 	public static class TypesKeywordContext extends ParserRuleContext {
 		public TerminalNode INT_TYPE() { return getToken(ParserSeaParser.INT_TYPE, 0); }
 		public TerminalNode STRING_TYPE() { return getToken(ParserSeaParser.STRING_TYPE, 0); }
+		public TerminalNode FLOAT_TYPE() { return getToken(ParserSeaParser.FLOAT_TYPE, 0); }
 		public TypesKeywordContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -543,7 +545,7 @@ public class ParserSeaParser extends Parser {
 			{
 			setState(65);
 			_la = _input.LA(1);
-			if ( !(_la==INT_TYPE || _la==STRING_TYPE) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 3584L) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -641,7 +643,7 @@ public class ParserSeaParser extends Parser {
 			setState(79);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (_la==INT_TYPE || _la==STRING_TYPE) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 3584L) != 0)) {
 				{
 				setState(71);
 				param();
@@ -886,7 +888,7 @@ public class ParserSeaParser extends Parser {
 				setState(119);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 360448L) != 0)) {
+				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 1507328L) != 0)) {
 					{
 					setState(111);
 					expr(0);
@@ -1000,7 +1002,7 @@ public class ParserSeaParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\u0013\u008a\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001"+
+		"\u0004\u0001\u0015\u008a\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001"+
 		"\u0002\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004"+
 		"\u0002\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007"+
 		"\u0002\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b"+
@@ -1020,7 +1022,7 @@ public class ParserSeaParser extends Parser {
 		"\f}\b\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0005\f\u0085"+
 		"\b\f\n\f\f\f\u0088\t\f\u0001\f\u0001c\u0001\u0018\r\u0000\u0002\u0004"+
 		"\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u0000\u0003\u0001\u0000"+
-		"\u000b\f\u0002\u0000\u0010\u0010\u0012\u0012\u0001\u0000\t\n\u008e\u0000"+
+		"\f\r\u0002\u0000\u0011\u0012\u0014\u0014\u0001\u0000\t\u000b\u008e\u0000"+
 		"\u001e\u0001\u0000\u0000\u0000\u0002!\u0001\u0000\u0000\u0000\u0004\'"+
 		"\u0001\u0000\u0000\u0000\u0006.\u0001\u0000\u0000\u0000\b7\u0001\u0000"+
 		"\u0000\u0000\n=\u0001\u0000\u0000\u0000\f?\u0001\u0000\u0000\u0000\u000e"+
@@ -1034,18 +1036,18 @@ public class ParserSeaParser extends Parser {
 		"\u0003\u0000\u0000\u0000! \u0001\u0000\u0000\u0000\"#\u0001\u0000\u0000"+
 		"\u0000#!\u0001\u0000\u0000\u0000#$\u0001\u0000\u0000\u0000$%\u0001\u0000"+
 		"\u0000\u0000%&\u0005\u0000\u0000\u0001&\u0003\u0001\u0000\u0000\u0000"+
-		"\'(\u0003\u000e\u0007\u0000()\u0005\u000f\u0000\u0000),\u0005\u0001\u0000"+
+		"\'(\u0003\u000e\u0007\u0000()\u0005\u0010\u0000\u0000),\u0005\u0001\u0000"+
 		"\u0000*-\u0003\f\u0006\u0000+-\u0003\u0018\f\u0000,*\u0001\u0000\u0000"+
 		"\u0000,+\u0001\u0000\u0000\u0000-\u0005\u0001\u0000\u0000\u0000.2\u0005"+
 		"\u0002\u0000\u0000/1\u0003\u0000\u0000\u00000/\u0001\u0000\u0000\u0000"+
 		"14\u0001\u0000\u0000\u000020\u0001\u0000\u0000\u000023\u0001\u0000\u0000"+
 		"\u000035\u0001\u0000\u0000\u000042\u0001\u0000\u0000\u000056\u0005\u0003"+
-		"\u0000\u00006\u0007\u0001\u0000\u0000\u000078\u0005\u000f\u0000\u0000"+
+		"\u0000\u00006\u0007\u0001\u0000\u0000\u000078\u0005\u0010\u0000\u0000"+
 		"8;\u0005\u0001\u0000\u00009<\u0003\f\u0006\u0000:<\u0003\u0018\f\u0000"+
 		";9\u0001\u0000\u0000\u0000;:\u0001\u0000\u0000\u0000<\t\u0001\u0000\u0000"+
 		"\u0000=>\u0007\u0000\u0000\u0000>\u000b\u0001\u0000\u0000\u0000?@\u0007"+
 		"\u0001\u0000\u0000@\r\u0001\u0000\u0000\u0000AB\u0007\u0002\u0000\u0000"+
-		"B\u000f\u0001\u0000\u0000\u0000CD\u0003\u000e\u0007\u0000DE\u0005\u000f"+
+		"B\u000f\u0001\u0000\u0000\u0000CD\u0003\u000e\u0007\u0000DE\u0005\u0010"+
 		"\u0000\u0000E\u0011\u0001\u0000\u0000\u0000FO\u0005\u0004\u0000\u0000"+
 		"GL\u0003\u0010\b\u0000HI\u0005\u0005\u0000\u0000IK\u0003\u0010\b\u0000"+
 		"JH\u0001\u0000\u0000\u0000KN\u0001\u0000\u0000\u0000LJ\u0001\u0000\u0000"+
@@ -1060,23 +1062,23 @@ public class ParserSeaParser extends Parser {
 		"\u0000\u0000_\u0015\u0001\u0000\u0000\u0000`b\u0003\n\u0005\u0000a`\u0001"+
 		"\u0000\u0000\u0000be\u0001\u0000\u0000\u0000cd\u0001\u0000\u0000\u0000"+
 		"ca\u0001\u0000\u0000\u0000df\u0001\u0000\u0000\u0000ec\u0001\u0000\u0000"+
-		"\u0000fg\u0005\b\u0000\u0000gh\u0005\u000f\u0000\u0000hi\u0003\u0012\t"+
+		"\u0000fg\u0005\b\u0000\u0000gh\u0005\u0010\u0000\u0000hi\u0003\u0012\t"+
 		"\u0000ij\u0003\u0014\n\u0000jk\u0003\u0006\u0003\u0000k\u0017\u0001\u0000"+
-		"\u0000\u0000lm\u0006\f\uffff\uffff\u0000mn\u0005\u000f\u0000\u0000nw\u0005"+
+		"\u0000\u0000lm\u0006\f\uffff\uffff\u0000mn\u0005\u0010\u0000\u0000nw\u0005"+
 		"\u0004\u0000\u0000ot\u0003\u0018\f\u0000pq\u0005\u0005\u0000\u0000qs\u0003"+
 		"\u0018\f\u0000rp\u0001\u0000\u0000\u0000sv\u0001\u0000\u0000\u0000tr\u0001"+
 		"\u0000\u0000\u0000tu\u0001\u0000\u0000\u0000ux\u0001\u0000\u0000\u0000"+
 		"vt\u0001\u0000\u0000\u0000wo\u0001\u0000\u0000\u0000wx\u0001\u0000\u0000"+
-		"\u0000xy\u0001\u0000\u0000\u0000y}\u0005\u0006\u0000\u0000z}\u0005\u000f"+
+		"\u0000xy\u0001\u0000\u0000\u0000y}\u0005\u0006\u0000\u0000z}\u0005\u0010"+
 		"\u0000\u0000{}\u0003\f\u0006\u0000|l\u0001\u0000\u0000\u0000|z\u0001\u0000"+
 		"\u0000\u0000|{\u0001\u0000\u0000\u0000}\u0086\u0001\u0000\u0000\u0000"+
-		"~\u007f\n\u0004\u0000\u0000\u007f\u0080\u0005\r\u0000\u0000\u0080\u0085"+
-		"\u0003\u0018\f\u0005\u0081\u0082\n\u0003\u0000\u0000\u0082\u0083\u0005"+
-		"\u000e\u0000\u0000\u0083\u0085\u0003\u0018\f\u0004\u0084~\u0001\u0000"+
-		"\u0000\u0000\u0084\u0081\u0001\u0000\u0000\u0000\u0085\u0088\u0001\u0000"+
-		"\u0000\u0000\u0086\u0084\u0001\u0000\u0000\u0000\u0086\u0087\u0001\u0000"+
-		"\u0000\u0000\u0087\u0019\u0001\u0000\u0000\u0000\u0088\u0086\u0001\u0000"+
-		"\u0000\u0000\u000f\u001e#,2;LOY^ctw|\u0084\u0086";
+		"~\u007f\n\u0004\u0000\u0000\u007f\u0080\u0005\u000e\u0000\u0000\u0080"+
+		"\u0085\u0003\u0018\f\u0005\u0081\u0082\n\u0003\u0000\u0000\u0082\u0083"+
+		"\u0005\u000f\u0000\u0000\u0083\u0085\u0003\u0018\f\u0004\u0084~\u0001"+
+		"\u0000\u0000\u0000\u0084\u0081\u0001\u0000\u0000\u0000\u0085\u0088\u0001"+
+		"\u0000\u0000\u0000\u0086\u0084\u0001\u0000\u0000\u0000\u0086\u0087\u0001"+
+		"\u0000\u0000\u0000\u0087\u0019\u0001\u0000\u0000\u0000\u0088\u0086\u0001"+
+		"\u0000\u0000\u0000\u000f\u001e#,2;LOY^ctw|\u0084\u0086";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

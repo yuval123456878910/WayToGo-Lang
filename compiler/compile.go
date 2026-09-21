@@ -2,6 +2,7 @@ package compiler
 
 import (
 	"encoding/binary"
+
 	"mj/parser"
 
 	"github.com/antlr4-go/antlr/v4"
@@ -30,7 +31,7 @@ type JVMbytecode struct {
 }
 
 func (j JVMbytecode) ContantPoolFullWithCount() []byte {
-	count := make([]byte, 2+len(j.ContantPoolData))
+	count := make([]byte, 2)
 	binary.BigEndian.PutUint16(count[:2], uint16(len(j.ContantPoolData))+1)
 
 	return append(count, j.ContantPool...)
@@ -73,15 +74,12 @@ func (s *parser.BaseParserSeaListener) VisitTerminal(node antlr.TerminalNode)
 
 func (l *CompilerWalk) Add(args ...byte) {
 	l.ByteCode.Bytecode = append(l.ByteCode.Bytecode, args...)
-
 }
 
 func (l *CompilerWalk) EnterProg(ctx *parser.ProgContext) {
-
 }
 
 func (l *CompilerWalk) ExitProg(ctx *parser.ProgContext) {
-
 }
 
 func Compile(parsedCodeTree parser.IProgContext) JVMbytecode {
