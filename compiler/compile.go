@@ -37,8 +37,25 @@ func (j JVMbytecode) ContantPoolFullWithCount() []byte {
 	return append(count, j.ContantPool...)
 }
 
+func (j *JVMbytecode) ForceAddToPool(bytes ...byte) {
+	j.ContantPool = append(j.ContantPool, bytes...)
+	j.NextSlot++
+}
+
+func Uint32ToBytes(num uint32) []byte {
+	l := make([]byte, 4)
+	binary.BigEndian.PutUint32(l[:], num)
+	return l
+}
+
 func (j *JVMbytecode) PatchAll() []byte {
-	return append(j.MagicPool, append(j.ContantPoolFullWithCount(), j.Bytecode...)...)
+	pool := j.ContantPoolFullWithCount()
+
+	BeforeIns := []byte{}
+	BeforeIns = append(BeforeIns, pool...)
+	BeforeIns = append(BeforeIns, Uint32ToBytes(uint32(len(j.Bytecode)+1))...)
+
+	return append(j.MagicPool, append(BeforeIns, j.Bytecode...)...)
 }
 
 /*
@@ -82,6 +99,10 @@ func (l *CompilerWalk) EnterProg(ctx *parser.ProgContext) {
 func (l *CompilerWalk) ExitProg(ctx *parser.ProgContext) {
 }
 
+func (l *CompilerWalk) CodeAtrabuateLength() int {
+	return len(l.ByteCode.Bytecode)
+}
+
 func Compile(parsedCodeTree parser.IProgContext) JVMbytecode {
 	listener := CompilerWalk{
 		BaseParserSeaListener: &parser.BaseParserSeaListener{},
@@ -90,6 +111,7 @@ func Compile(parsedCodeTree parser.IProgContext) JVMbytecode {
 	listener.ByteCode.MagicPool = append(MAGIC, append(MINOR_VERSION, MAJOR_VERSION...)...)
 
 	antlr.ParseTreeWalkerDefault.Walk(&listener, parsedCodeTree)
+	listener.ByteCode.MakeConstantUtf8("Code")
 
 	return listener.ByteCode
 }

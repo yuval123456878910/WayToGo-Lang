@@ -29,7 +29,8 @@ funcDecl:
         returnList
         block
         ;
-
+class: 
+    CLASS_DEC
 
 
 
@@ -44,6 +45,7 @@ expr: ID '(' (expr (',' expr)*)? ')'
 /* key words */
 RETURN: 'return';
 DEFINE: 'def';
+CLASS_DEC: 'class';
 INT_TYPE : 'int';
 STRING_TYPE : 'string';
 FLOAT_TYPE : 'float';
